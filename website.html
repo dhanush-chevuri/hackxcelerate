@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackXcelerate - MLSC Hackathon</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+    .gradient-bg {
+            background: linear-gradient(135deg, #6B46C1 0%, #00B5D8 100%);
+        }
+
+        .sandpaper-bg {
+            background-color: #f5f5f4;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-blend-mode: multiply;
+            opacity: 0.85;
+        }
+
+        @keyframes moveUpDown1 {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px); /* Move up */
+            }
+            100% {
+                transform: translateY(0); /* Move back down */
+            }
+        }
+
+        @keyframes moveUpDown2 {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(10px); /* Move down */
+            }
+            100% {
+                transform: translateY(0); /* Move back up */
+            }
+        }
+
+        .sponsor-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            padding: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .sponsor-logo:nth-child(odd) {
+            animation: moveUpDown1 2s ease-in-out infinite; /* Apply the first animation to odd images */
+        }
+
+        .sponsor-logo:nth-child(even) {
+            animation: moveUpDown2 2s ease-in-out infinite; /* Apply the second animation to even images */
+        }
+
+        .sponsor-logo:hover {
+            transform: scale(1.1);
+        }
+
+        /* Timeline Styles */
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: calc(100% - 4rem);
+            background: linear-gradient(to bottom, #6B46C1, #00B5D8);
+            top: 2rem;
+        }
+
+        .timeline-card {
+            width: calc(50% - 2rem);
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline-left {
+            margin-right: auto;
+            padding-right: 3rem;
+        }
+
+        .timeline-right {
+            margin-left: auto;
+            padding-left: 3rem;
+        }
+
+        .timeline-card::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-left::after {
+            right: -10px;
+            border-right: 15px solid #6B46C1;
+        }
+
+        .timeline-right::after {
+            left: -10px;
+            border-left: 15px solid #6B46C1;
+        }
+
+        /* Coordinator Cards */
+        .coordinator-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .coordinator-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .coordinator-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #6B46C1 0%, #00B5D8 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .coordinator-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 1rem;
+            }
+
+            .timeline-card {
+                width: calc(100% - 3rem);
+                margin-left: 3rem;
+                padding-left: 1.5rem;
+                padding-right: 1rem;
+            }
+
+            .timeline-card::after {
+                left: -1.5rem;
+                border-left: none;
+                border-right: 15px solid #6B46C1;
+            }
+
+            .timeline-left, .timeline-right {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sponsor Logos Section -->
+    <div class="sandpaper-bg py-4 overflow-x-auto sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-around items-center space-x-4 md:space-x-8 min-w-max">
+                <img src="download.jpeg" alt="Sponsor 1" class="sponsor-logo w-16 md:w-24 bg-transparent">
+                <img src="mlsckare_logo.jpeg" alt="Sponsor 2" class="sponsor-logo w-16 md:w-24 bg-transparent">
+                <img src="Picture1.png" alt="Sponsor 3" class="sponsor-logo w-16 md:w-24 bg-transparent">
+                <img src="k7.png" alt="Sponsor 4" class="sponsor-logo w-16 md:w-24 bg-transparent">
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 py-12 md:py-20 text-center text-white">
+            <h1 class="text-4xl md:text-6xl font-bold mb-8">HackXcelerate</h1>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4 mb-8">
+                <div class="flex items-center">
+                    <span class="text-xl md:text-2xl">📅</span>
+                    <span class="ml-2 text-sm md:text-base">March 1st&2nd,2025</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-xl md:text-2xl">⏰</span>
+                    <span class="ml-2 text-sm md:text-base">24 Hours</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-xl md:text-2xl">📍</span>
+                    <span class="ml-2 text-sm md:text-base">KARE 9th Block Seminar Hall</span>
+                </div>
+            </div>
+
+            <div class="text-xl md:text-2xl mb-12">
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0">
+                    <span class="text-2xl md:text-3xl">🏆</span>
+                    <span class="ml-2 text-sm md:text-base">Prize Pool: ₹20,000 + Internship Opportunities</span>
+                </div>
+            </div>
+
+            <button class="bg-white text-gray-800 rounded-full p-4">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfNGbytJ9SN5L0lLApr3TPqC4D6-QoPks3tHnl2w6ZFxsXqKA/viewform">
+                🚀 Register Now - 350 Per Participant
+            </a>
+            </button>
+        </div>
+    </div>
+
+    <!-- Timeline Section -->
+    <div class="py-12 md:py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16">Event Timeline</h2>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <!-- Timeline items -->
+                <div class="timeline-card timeline-left">
+                    <div class="bg-white p-4 md:p-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-200">
+                        <div class="text-purple-600 font-bold mb-2 text-sm md:text-base">Day 1 - 4:00 PM</div>
+                        <div class="text-lg md:text-xl font-semibold">Opening Ceremony & Kickoff</div>
+                        <p class="text-gray-600 mt-2 text-sm md:text-base">Welcome address and hackathon guidelines</p>
+                    </div>
+                </div>
+
+                <div class="timeline-card timeline-right">
+                    <div class="bg-white p-4 md:p-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-200">
+                        <div class="text-purple-600 font-bold mb-2 text-sm md:text-base">Day 1 - 12:00 AM</div>
+                        <div class="text-lg md:text-xl font-semibold">Review - I</div>
+                        <p class="text-gray-600 mt-2 text-sm md:text-base">First project review and mentorship session</p>
+                    </div>
+                </div>
+
+                <div class="timeline-card timeline-left">
+                    <div class="bg-white p-4 md:p-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-200">
+                        <div class="text-purple-600 font-bold mb-2 text-sm md:text-base">Day 1 - 7:00 AM</div>
+                        <div class="text-lg md:text-xl font-semibold">Review - II</div>
+                        <p class="text-gray-600 mt-2 text-sm md:text-base">Second progress check and feedback</p>
+                    </div>
+                </div>
+
+                <div class="timeline-card timeline-right">
+                    <div class="bg-white p-4 md:p-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-200">
+                        <div class="text-purple-600 font-bold mb-2 text-sm md:text-base">Day 2 - 3:00 PM</div>
+                        <div class="text-lg md:text-xl font-semibold">Final Submissions</div>
+                        <p class="text-gray-600 mt-2 text-sm md:text-base">Project submission and presentations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem Statements Section -->
+    <div class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Problem Statements</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-400 mx-auto mb-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Deep Learning Card -->
+                <div class="group bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:border-purple-500 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4c-1.67 0-3 1.33-3 3 0 1.5 1 2.75 2.25 3.5-.5.75-.75 1.5-.75 2.25 0 1.67 1.33 3 3 3s3-1.33 3-3c0-.75-.25-1.5-.75-2.25 1.25-.75 2.25-2 2.25-3.5 0-1.67-1.33-3-3-3zm0 14c-1.67 0-3 1.33-3 3 0 1.67 1.33 3 3 3s3-1.33 3-3c0-1.67-1.33-3-3-3zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 ml-4">Deep Learning</h3>
+                    </div>
+                    <p class="text-gray-600">Explore neural networks and their applications.</p>
+                </div>
+
+                <!-- Web Development Card -->
+                <div class="group bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v18H3V3z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 ml-4">Web Development</h3>
+                    </div>
+                    <p class="text-gray-600">Build responsive and dynamic web applications.</p>
+                </div>
+
+                <!-- Data Science Card -->
+                <div class="group bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:border-teal-500 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C8.69 2 6 4.69 6 8c0 1.74.69 3.31 1.8 4.5C6.69 14.69 6 16.26 6 18c0 3.31 2.69 6 6 6s6-2.69 6-6c0-1.74-.69-3.31-1.8-4.5C17.31 11.31 18 9.74 18 8c0-3.31-2.69-6-6-6zM8 8c0-1.1.9-2 2-2s2 .9 2 2-2 2-2 2-2-.9-2-2zm8 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 ml-4">Data Science</h3>
+                    </div>
+                    <p class="text-gray-600">Analyze data to extract meaningful insights.</p>
+                </div>
+
+                <!-- Cybersecurity Card -->
+                <div class="group bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:border-red-500 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l2 7h7l-5 4 2 7-6-4-6 4 2-7-5-4h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Cybersecurity</h3>
+                    </div>
+                    <p class="text-gray-600">Protect systems and networks from cyber threats.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Evaluation Criteria Section -->
+    <div class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Evaluation Criteria</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-400 mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Innovation Card -->
+                <div class="group bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:border-purple-500 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-500 transition-colors duration-300">
+                            <svg class="w-6 h-6 text-purple-500 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold text-gray-800">Innovation</h3>
+                            <p class="text-purple-600 font-medium">25 Marks</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">Originality and creativity in problem-solving approach</p>
+                </div>
+
+                <!-- Approach Card -->
+                <div class="group bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-500 transition-colors duration-300">
+                            <svg class="w-6 h-6 text-blue-500 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold text-gray-800">Approach</h3>
+                            <p class="text-blue-600 font-medium">20 Marks</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">Methodology and problem statement analysis</p>
+                </div>
+
+                <!-- Implementation Card -->
+                <div class="group bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:border-teal-500 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center group-hover:bg-black transition-colors duration-300">
+                            <svg class="w-6 h-6 text-teal-500 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold text-gray-800">Implementation</h3>
+                            <p class="text-teal-600 font-medium">25 Marks</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">Technical execution and solution quality</p>
+                </div>
+
+                <!-- Impact Card -->
+                <div class="group bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:border-red-500 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center group-hover:bg-red-500 transition-colors duration-300">
+                            <svg class="w-6 h-6 text-red-500 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold text-gray-800">Impact & Viability</h3>
+                            <p class="text-red-600 font-medium">20 Marks</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">Potential impact and business viability</p>
+                </div>
+
+                <!-- Presentation Card -->
+                <div class="group bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:border-green-500 transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-500 transition-colors duration-300">
+                            <svg class="w-6 h-6 text-green-500 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold text-gray-800">Presentation</h3>
+                            <p class="text-green-600 font-medium">10 Marks</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">Quality of presentation and demonstration</p>
+                </div>
+            </div>
+
+            <!-- Total Score -->
+            <div class="mt-8 text-center">
+                <div class="inline-block bg-gray-100 px-6 py-3 rounded-full">
+                    <span class="text-gray-600 font-medium">Total Score: </span>
+                    <span class="text-purple-600 font-bold">100 Marks</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Coordinators Section -->
+    <div class="coordinator-section">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Event Coordinators</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-400 mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Faculty Coordinators Card -->
+                <div class="coordinator-card">
+                    <div class="flex items-center mb-6">
+                        <div class="coordinator-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">Faculty Coordinators</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="border-b border-gray-100 pb-4">
+                            <h4 class="text-lg font-semibold text-gray-800">Dr.J.Bharat singh</h4>
+                            <p class="text-gray-600">Charter official, MLSC & Associate Professor, CSE</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-4">
+                            <h4 class="text-lg font-semibold text-gray-800">Mrs.R.Durga Meena</h4>
+                            <p class="text-gray-600">Faculty Coordinator, MLSC & Assistant Professor, CSE</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Student Coordinators Card -->
+                <div class="coordinator-card">
+                    <div class="flex items-center mb-6">
+                        <div class="coordinator-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 3L1 9l11 6l9-4.91V17h2V9L12 3z M17 16l-6 3l-6-3v-2l6 3l6-3V16z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">Student Coordinators</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="border-b border-gray-100 pb-4">
+                            <h4 class="text-lg font-semibold text-gray-800">Uday Gundu</h4>
+                            <p class="text-gray-600">Chairperson MLSCKARE</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-4">
+                            <h4 class="text-lg font-semibold text-gray-800">Dhanush Chevuri</h4>
+                            <p class="text-gray-600">Vice-Chairperson MLSCKARE</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-4">
+                            <h4 class="text-lg font-semibold text-gray-800">Kushwanth satya sai </h4>
+                            <p class="text-gray-600">PR&Outreach MLSCKARE</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
